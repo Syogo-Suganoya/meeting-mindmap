@@ -33,6 +33,10 @@
 
 いずれも出典がある場合はUI上にリンクを表示する(著作権配慮のため、原文の逐語引用ではなく要約・パラフレーズしたテキストのみを使用)。
 
+## アーキテクチャ
+
+![meeting-mindmap アーキテクチャ図](docs/architecture.png)
+
 ## 技術構成
 
 - Next.js 16(App Router)+ React 19 + TypeScript + Tailwind CSS 4
