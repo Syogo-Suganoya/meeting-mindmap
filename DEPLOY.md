@@ -79,6 +79,17 @@ firebase login
 
 連携したブランチにpushすると自動でビルド・デプロイされる。
 
+### A-7. GitHub Actions によるビルド検証とDeployments記録
+
+`.github/workflows/deploy.yml` が `main` へのpushで動く。役割は2つ。
+
+1. **ビルド検証**：`npm ci` → `npx tsc --noEmit` → `npm run lint` → `npm run build` を実行し、壊れたコードがデプロイされていないかを後追いで検知する
+2. **Deployments欄への記録**：ジョブに `environment: production` を設定しているため、GitHubのリポジトリトップ（About）と Environments 画面に `production` とその公開URLが表示される
+
+**このワークフローはデプロイを実行しない。** 実際のビルド・ロールアウトは Firebase App Hosting のGitHub連携が行っており、その成否はコミットの **Checks 欄（`App Hosting - Rollout ...`）** に出る。ワークフローが success でもロールアウトが失敗している可能性はあるため、リリースの最終確認は Checks 欄を見ること。
+
+バックエンドIDやリージョンを変更した場合は、`deploy.yml` 内の `environment.url` も合わせて更新する。
+
 ---
 
 ## 方法B：Docker（VPS / 自前サーバー）
